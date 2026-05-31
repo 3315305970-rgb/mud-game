@@ -42,6 +42,15 @@ def handle_command(player: Player, command: str, args: str = "") -> str:
     elif cmd in ["sex", "亲密"]:
         from .sex_system import start_sex_event
         return start_sex_event(player, args or "青梅竹马")
+    elif cmd in ["catch", "抓宠"]:
+        from .pet import catch_pet
+        return catch_pet(player, args or "小狐妖")
+    elif cmd in ["book", "打书"]:
+        from .pet import book_pet
+        return book_pet(player, args or "魅惑")
+    elif cmd in ["fullfight", "完整战斗"]:
+        from .full_combat import full_combat
+        return full_combat(player, args or "后山狼王")
     elif cmd in ["help", "帮助"]:
         return get_help_text()
     else:
@@ -55,9 +64,12 @@ def get_help_text():
         "xiulian/修炼 - 修炼提升\n"
         "inventory/i/背包 - 查看背包\n"
         "fight/战斗 - 普通战斗\n"
+        "fullfight/完整战斗 - 完整战斗\n"
         "alchemy/炼药 - 炼制丹药\n"
         "forge/打造 - 打造装备\n"
         "sex/亲密 - 性爱互动（需性欲足够）\n"
+        "catch/抓宠 - 捕捉灵宠\n"
+        "book/打书 - 宠物打书\n"
         "quest/任务 - 查看任务\n"
         "accept <ID> - 接受任务\n"
         "help - 此帮助\n\n"
