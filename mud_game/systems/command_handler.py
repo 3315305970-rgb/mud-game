@@ -6,6 +6,10 @@ systems/command_handler.py
 
 from core.player import Player
 
+from .cultivation import cultivate
+from .quest import QuestManager
+
+
 def handle_command(player: Player, command: str, args: str = "") -> str:
     cmd = command.lower().strip()
     
@@ -16,16 +20,19 @@ def handle_command(player: Player, command: str, args: str = "") -> str:
         from .room_system import move
         return move(player, args)
     elif cmd in ["xiulian", "修炼"]:
-        from .cultivation import cultivate
         return cultivate(player)
     elif cmd in ["quest", "任务"]:
-        from .quest import QuestManager
         qm = QuestManager(player)
         return qm.list_quests()
     elif cmd in ["accept", "接受任务"]:
-        from .quest import QuestManager
         qm = QuestManager(player)
         return qm.start_quest(args)
+    elif cmd in ["inventory", "i", "背包"]:
+        from .inventory import show_inventory
+        return show_inventory(player)
+    elif cmd in ["fight", "战斗"]:
+        from .combat import start_combat
+        return start_combat(player)
     elif cmd in ["help", "帮助"]:
         return get_help_text()
     else:
@@ -37,6 +44,8 @@ def get_help_text():
         "look/l/查看 - 查看当前位置\n"
         "go <方向> - 移动\n"
         "xiulian/修炼 - 修炼提升\n"
+        "inventory/i/背包 - 查看背包\n"
+        "fight/战斗 - 普通战斗\n"
         "quest/任务 - 查看任务\n"
         "accept <ID> - 接受任务\n"
         "help - 此帮助\n\n"
