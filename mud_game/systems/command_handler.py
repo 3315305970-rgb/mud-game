@@ -6,8 +6,6 @@ systems/command_handler.py
 
 from core.player import Player
 
-# 延迟导入避免循环
-
 def handle_command(player: Player, command: str, args: str = "") -> str:
     cmd = command.lower().strip()
     
