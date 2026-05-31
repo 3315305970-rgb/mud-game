@@ -33,6 +33,15 @@ def handle_command(player: Player, command: str, args: str = "") -> str:
     elif cmd in ["fight", "战斗"]:
         from .combat import start_combat
         return start_combat(player)
+    elif cmd in ["alchemy", "炼药"]:
+        from .alchemy import refine_pill
+        return refine_pill(player, args)
+    elif cmd in ["forge", "打造"]:
+        from .crafting import forge_equipment
+        return forge_equipment(player, args)
+    elif cmd in ["sex", "亲密"]:
+        from .sex_system import start_sex_event
+        return start_sex_event(player, args or "青梅竹马")
     elif cmd in ["help", "帮助"]:
         return get_help_text()
     else:
@@ -46,6 +55,9 @@ def get_help_text():
         "xiulian/修炼 - 修炼提升\n"
         "inventory/i/背包 - 查看背包\n"
         "fight/战斗 - 普通战斗\n"
+        "alchemy/炼药 - 炼制丹药\n"
+        "forge/打造 - 打造装备\n"
+        "sex/亲密 - 性爱互动（需性欲足够）\n"
         "quest/任务 - 查看任务\n"
         "accept <ID> - 接受任务\n"
         "help - 此帮助\n\n"
