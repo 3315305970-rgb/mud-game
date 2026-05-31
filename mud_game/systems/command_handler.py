@@ -51,6 +51,15 @@ def handle_command(player: Player, command: str, args: str = "") -> str:
     elif cmd in ["fullfight", "完整战斗"]:
         from .full_combat import full_combat
         return full_combat(player, args or "后山狼王")
+    elif cmd in ["train", "训练"]:
+        from .building import train_at_wuguan
+        return train_at_wuguan(player)
+    elif cmd in ["rest", "休息"]:
+        from .building import rest_at_inn
+        return rest_at_inn(player)
+    elif cmd in ["event", "随机事件"]:
+        from .event import trigger_random_event
+        return trigger_random_event(player)
     elif cmd in ["help", "帮助"]:
         return get_help_text()
     else:
@@ -70,6 +79,9 @@ def get_help_text():
         "sex/亲密 - 性爱互动（需好感度≥70 + 任务完成 + 性欲≥40）\n"
         "catch/抓宠 - 捕捉灵宠\n"
         "book/打书 - 宠物打书\n"
+        "train/训练 - 武馆训练\n"
+        "rest/休息 - 客栈休息\n"
+        "event/随机事件 - 触发随机事件\n"
         "quest/任务 - 查看任务\n"
         "accept <ID> - 接受任务\n"
         "help - 此帮助\n\n"
