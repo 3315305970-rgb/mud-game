@@ -20,6 +20,7 @@
 - ✅ systems/quest.py - 任务逻辑
 - ✅ server.py - 单机服务器（单一职责）
 - ✅ commands.py - 兼容旧接口（逐步迁移中）
+- ✅ config/romance_targets.py - 可攻略女性配置（好感度+任务驱动性爱）
 
 ## 运行
 ```bash
