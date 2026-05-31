@@ -67,7 +67,7 @@ def get_help_text():
         "fullfight/完整战斗 - 完整战斗\n"
         "alchemy/炼药 - 炼制丹药\n"
         "forge/打造 - 打造装备\n"
-        "sex/亲密 - 性爱互动（需性欲足够）\n"
+        "sex/亲密 - 性爱互动（需好感度≥70 + 任务完成 + 性欲≥40）\n"
         "catch/抓宠 - 捕捉灵宠\n"
         "book/打书 - 宠物打书\n"
         "quest/任务 - 查看任务\n"
