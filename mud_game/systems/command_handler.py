@@ -79,6 +79,14 @@ def handle_command(player: Player, command: str, args: str = "") -> str:
         from .harem import summon_harem
         parts = args.split() if args else ["qingmei", "亲密"]
         return summon_harem(player, parts[0], " ".join(parts[1:]) if len(parts) > 1 else "亲密")
+    elif cmd in ["flirt", "调情", "聊天"]:
+        from config.romance_targets import get_target
+        target = get_target(args or "qingmei")
+        if target:
+            import random
+            template = random.choice(list(target["dialogue_templates"].values()))
+            return f"【与 {target['name']} 互动】\n{template}"
+        return "未找到该女性。"
     elif cmd in ["help", "帮助"]:
         return get_help_text()
     else:
@@ -107,6 +115,7 @@ def get_help_text():
         "harem/后宫 - 查看后宫成员\n"
         "recruit/收录 <ID> - 尝试收录女性进后宫\n"
         "summon/召唤 <ID> [动作] - 召唤后宫成员互动\n"
+        "flirt/调情/聊天 <ID> - 与女性调情互动\n"
         "quest/任务 - 查看任务\n"
         "accept <ID> - 接受任务\n"
         "help - 此帮助\n\n"
