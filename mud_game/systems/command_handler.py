@@ -60,6 +60,15 @@ def handle_command(player: Player, command: str, args: str = "") -> str:
     elif cmd in ["event", "随机事件"]:
         from .event import trigger_random_event
         return trigger_random_event(player)
+    elif cmd in ["skill", "技能"]:
+        from .skill import learn_skill
+        return learn_skill(player, args or "基础拳法")
+    elif cmd in ["title", "称号"]:
+        from .title import show_titles
+        return show_titles(player)
+    elif cmd in ["buff", "状态"]:
+        from .buff import apply_buff
+        return apply_buff(player, args or "力量提升")
     elif cmd in ["help", "帮助"]:
         return get_help_text()
     else:
@@ -82,6 +91,9 @@ def get_help_text():
         "train/训练 - 武馆训练\n"
         "rest/休息 - 客栈休息\n"
         "event/随机事件 - 触发随机事件\n"
+        "skill/技能 - 学习技能\n"
+        "title/称号 - 查看称号\n"
+        "buff/状态 - 获得状态效果\n"
         "quest/任务 - 查看任务\n"
         "accept <ID> - 接受任务\n"
         "help - 此帮助\n\n"
