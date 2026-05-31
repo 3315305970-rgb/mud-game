@@ -3,25 +3,39 @@
 """
 
 from rooms import ROOMS, ITEMS, NPCS
+from quest import QuestManager
 
 def handle_command(player, command, args=""):
     cmd = command.lower().strip()
+    qm = QuestManager(player)
+    
     if cmd in ["look", "l", "查看"]:
         return look(player)
     elif cmd in ["go", "移动", "走"]:
-        return move(player, args)
+        resp = move(player, args)
+        # 检查任务进度
+        progress = qm.check_progress(f"go {args}")
+        return resp + ("\n" + progress if progress else "")
     elif cmd in ["inventory", "i", "背包", "物品"]:
         return show_inventory(player)
     elif cmd in ["status", "状态", "我"]:
         return player.get_status()
     elif cmd in ["talk", "对话", "说"]:
-        return talk(player, args)
+        resp = talk(player, args)
+        progress = qm.check_progress(f"talk {args}")
+        return resp + ("\n" + progress if progress else "")
     elif cmd in ["buy", "购买"]:
-        return buy(player, args)
+        resp = buy(player, args)
+        progress = qm.check_progress(f"buy {args}")
+        return resp + ("\n" + progress if progress else "")
     elif cmd in ["sell", "出售"]:
         return sell(player, args)
     elif cmd in ["dig", "挖宝"]:
         return dig(player)
+    elif cmd in ["quest", "任务", "任务列表"]:
+        return qm.list_quests()
+    elif cmd in ["accept", "接受任务"]:
+        return qm.start_quest(args)
     elif cmd in ["help", "帮助", "菜单"]:
         return show_help()
     else:
@@ -144,5 +158,7 @@ def show_help():
         "buy <物品> - 购买物品\n"
         "sell <物品> - 出售物品\n"
         "dig - 挖宝 (需藏宝图)\n"
+        "quest/任务 - 查看进行中任务\n"
+        "accept <任务ID> - 接受任务\n"
         "help - 显示此帮助"
     )
