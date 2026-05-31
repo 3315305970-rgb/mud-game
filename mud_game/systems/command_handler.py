@@ -69,6 +69,16 @@ def handle_command(player: Player, command: str, args: str = "") -> str:
     elif cmd in ["buff", "状态"]:
         from .buff import apply_buff
         return apply_buff(player, args or "力量提升")
+    elif cmd in ["harem", "后宫"]:
+        from .harem import show_harem
+        return show_harem(player)
+    elif cmd in ["recruit", "收录"]:
+        from .harem import recruit_to_harem
+        return recruit_to_harem(player, args or "qingmei")
+    elif cmd in ["summon", "召唤"]:
+        from .harem import summon_harem
+        parts = args.split() if args else ["qingmei", "亲密"]
+        return summon_harem(player, parts[0], " ".join(parts[1:]) if len(parts) > 1 else "亲密")
     elif cmd in ["help", "帮助"]:
         return get_help_text()
     else:
@@ -94,6 +104,9 @@ def get_help_text():
         "skill/技能 - 学习技能\n"
         "title/称号 - 查看称号\n"
         "buff/状态 - 获得状态效果\n"
+        "harem/后宫 - 查看后宫成员\n"
+        "recruit/收录 <ID> - 尝试收录女性进后宫\n"
+        "summon/召唤 <ID> [动作] - 召唤后宫成员互动\n"
         "quest/任务 - 查看任务\n"
         "accept <ID> - 接受任务\n"
         "help - 此帮助\n\n"
